@@ -4,9 +4,87 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoWPFApp"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="TodoApp" Height="590" Width="1000" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+
     <Grid>
+        <!--Grid Background-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border CornerRadius="20 0 0 20" Background="#fefefe"/>
+
+            <Border CornerRadius="0 20 20 0" MouseDown="Border_MouseDown" Background="DarkSlateGray" Grid.Column="1"/>
+        </Grid>
+
+        <!--Grid Controls-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <!--Year Selection-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 50 0 30">
+                    <Button Style="{StaticResource button}">
+                        <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
+                    </Button>
+
+                    <Button Content="2020" Style="{StaticResource button}"/>
+                    <Button Content="2021" Style="{StaticResource button}"/>
+                    <Button Content="2022" Style="{StaticResource button}"/>
+                    <Button Content="2023" Style="{StaticResource button}"/>
+                    <Button Content="2024" Style="{StaticResource button}" FontSize="24" Foreground="#c76f69"/>
+
+                    <Button Style="{StaticResource button}">
+                        <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
+                    </Button>
+                </StackPanel>
+
+                <!--Month Selection-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="1" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="2" Style="{StaticResource buttonMonth}" Foreground="#c73f69" FontWeight="SemiBold"/>
+                    <Button Content="3" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="4" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="5" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="6" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="7" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="8" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="9" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="10" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="11" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="12" Style="{StaticResource buttonMonth}"/>
+                </StackPanel>
+
+                <Separator Height="1" Background="#cacaca" Margin="30 10"/>
+
+                <TextBlock Text="February" Foreground="#c73f69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
+
+                <Calendar />
+            </StackPanel>
+
+
+            <StackPanel Grid.Column="1">
+                <!--Titles-->
+                <StackPanel Margin="20 45 30 10" Orientation="Horizontal">
+                    <TextBlock Text="19" FontSize="50" Foreground="#c73f69"/>
+
+                    <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
+                        <TextBlock Text="February" Foreground="#c73f69" FontSize="24"/>
+                        <TextBlock Text="Monday" Foreground="#d35780" FontSize="14"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
 
     </Grid>
 </Window>
