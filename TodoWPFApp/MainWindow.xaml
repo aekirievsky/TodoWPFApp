@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoWPFApp"
+        xmlns:uc="clr-namespace:TodoWPFApp.UserControls"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="TodoApp" Height="590" Width="900" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
@@ -131,13 +132,13 @@
                         <Button Grid.Column="1" Style="{StaticResource button}">
                             <fa:ImageAwesome Icon="PlusCircle" Width="28" Height="28" Foreground="#f9f9f9"/>
                         </Button>
-                        
+
                     </Grid>
                 </Border>
-                
+
                 <!--Notes-->
-                
-                
+
+
             </StackPanel>
         </Grid>
 

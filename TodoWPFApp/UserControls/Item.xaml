@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TodoWPFApp.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" Name="ItemUC" >
+             mc:Ignorable="d" Name="item" >
     <Grid Margin="30 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -13,15 +13,15 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <fa:ImageAwesome Icon="Check" Width="20" Height="20" VerticalAlignment="Top" Foreground="#f1f1f1" Margin="0 3 0 0"/>
+        <fa:ImageAwesome Icon="{Binding Path=Icon,ElementName=item}" Width="20" Height="20" VerticalAlignment="Top" Foreground="#f1f1f1" Margin="0 3 0 0"/>
 
         <StackPanel Grid.Column="1" Margin="10 0">
-            <TextBlock FontFamily="16" Foreground="White" Text="Hello"/>
+            <TextBlock FontFamily="16" Foreground="{Binding Path=Color,ElementName=item}" Text="{Binding Path=Title,ElementName=item}"/>
 
             <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                <fa:ImageAwesome Grid.Column="2" Icon="Bell" Width="12" Height="12" Foreground="White"/>
+                <fa:ImageAwesome Grid.Column="2" Icon="{Binding Path=IconBell,ElementName=item}" Width="12" Height="12" Foreground="{Binding Path=Color,ElementName=item}"/>
 
-                <TextBlock FontSize="12" Foreground="White" Text="Hi" Margin="8 0 0 0"/>
+                <TextBlock FontSize="12" Foreground="{Binding Path=Color,ElementName=item}" Text="{Binding Path=Time,ElementName=item}" Margin="8 0 0 0"/>
             </StackPanel>
         </StackPanel>
 
@@ -47,12 +47,15 @@
             </ToggleButton.Template>
         </ToggleButton>
 
-        <Popup IsOpen="True" AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding ElementName=btnMenu}" Placement="Left"
+        <Popup IsOpen="{Binding IsChecked,ElementName=btnMenu}" AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding ElementName=btnMenu}" Placement="Left"
                VerticalOffset="30" HorizontalOffset="15">
 
             <Border Background="White" CornerRadius="5" Padding="0 4">
                 <StackPanel>
-
+                    <local:MenuButton Icon="Check" Caption="Check"/>
+                    <local:MenuButton Icon="BellSlash" Caption="Mute"/>
+                    <local:MenuButton Icon="Pencil" Caption="Edit"/>
+                    <local:MenuButton Icon="Trash" Caption="Delete"/>
                 </StackPanel>
             </Border>
 
