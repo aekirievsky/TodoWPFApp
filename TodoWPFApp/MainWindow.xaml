@@ -68,7 +68,7 @@
 
                 <TextBlock Text="February" Foreground="#c73f69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
 
-                <Calendar />
+                <Calendar CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" />
             </StackPanel>
 
 
@@ -137,7 +137,11 @@
                 </Border>
 
                 <!--Notes-->
-
+                <uc:Item Title="Test 1" Time="09:45 - 10:30" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
+                <uc:Item Title="Test 2" Time="11:30 - 12:00" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
+                <uc:Item Title="Test 3" Time="14:00 - 15:30" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
+                <uc:Item Title="Test 4" Time="20:15 - 21:45" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
+                <uc:Item Title="Test 5" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
 
             </StackPanel>
         </Grid>

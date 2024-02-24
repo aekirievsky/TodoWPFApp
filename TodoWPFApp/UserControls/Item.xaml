@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TodoWPFApp.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" Name="item" >
+             mc:Ignorable="d" Name="ItemUC" >
     <Grid Margin="30 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -13,15 +13,15 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <fa:ImageAwesome Icon="{Binding Path=Icon,ElementName=item}" Width="20" Height="20" VerticalAlignment="Top" Foreground="#f1f1f1" Margin="0 3 0 0"/>
+        <fa:ImageAwesome Icon="{Binding Path=Icon,ElementName=ItemUC}" Width="20" Height="20" VerticalAlignment="Top" Foreground="#f1f1f1" Margin="0 3 0 0"/>
 
         <StackPanel Grid.Column="1" Margin="10 0">
-            <TextBlock FontFamily="16" Foreground="{Binding Path=Color,ElementName=item}" Text="{Binding Path=Title,ElementName=item}"/>
+            <TextBlock FontFamily="16" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Title,ElementName=ItemUC}"/>
 
             <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                <fa:ImageAwesome Grid.Column="2" Icon="{Binding Path=IconBell,ElementName=item}" Width="12" Height="12" Foreground="{Binding Path=Color,ElementName=item}"/>
+                <fa:ImageAwesome Grid.Column="2" Icon="{Binding Path=IconBell,ElementName=ItemUC}" Width="12" Height="12" Foreground="{Binding Path=Color,ElementName=ItemUC}"/>
 
-                <TextBlock FontSize="12" Foreground="{Binding Path=Color,ElementName=item}" Text="{Binding Path=Time,ElementName=item}" Margin="8 0 0 0"/>
+                <TextBlock FontSize="12" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Time,ElementName=ItemUC}" Margin="8 0 0 0"/>
             </StackPanel>
         </StackPanel>
 
