@@ -14,7 +14,7 @@
         <!--Grid Background-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -26,7 +26,7 @@
         <!--Grid Controls-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -56,20 +56,20 @@
                     </Button>
                 </StackPanel>
 
-                <!--Month Selection--> 
+                <!--Month Selection-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="January" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="February" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="March" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="April" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="May" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="June" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="July" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="August" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="September" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="October" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="November" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
-                    <Button Content="December" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="1" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="2" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="3" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="4" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="5" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="6" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="7" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="8" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="9" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="10" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="11" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="12" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="#cacaca" Margin="30 10"/>

@@ -23,7 +23,9 @@ namespace TodoWPFApp
             }
 
             SelectedYear = DateTime.Now.Year;
-
+            DateTime startDate = new DateTime(SelectedYear, 1, 1);
+            calendar.DisplayDate = startDate;
+            calendar.SelectedDate = startDate;
 
             UpdateCalendar();
             DataContext = this;
@@ -112,15 +114,14 @@ namespace TodoWPFApp
         private void MonthButton_Click(object sender, RoutedEventArgs e)
         {
             Button clickedBtn = (Button)sender;
-            string selectedMonth = clickedBtn.Content.ToString();
-            int monthIndex = Array.IndexOf(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames, selectedMonth);
+            int selectedMonth = Convert.ToInt32(clickedBtn.Content);
 
-            if (monthIndex >= 0)
+            if (selectedMonth >= 1 && selectedMonth <= 12)
             {
-                calendar.DisplayDate = new DateTime(SelectedYear, monthIndex + 1, 1);
-                calendar.SelectedDate = new DateTime(SelectedYear, monthIndex + 1, 1);
+                calendar.DisplayDate = new DateTime(SelectedYear, selectedMonth + 1, 1);
+                calendar.SelectedDate = new DateTime(SelectedYear, selectedMonth + 1, 1);
 
-                selectedMonthText.Text = selectedMonth;
+                selectedMonthText.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth);
             }
         }
 
