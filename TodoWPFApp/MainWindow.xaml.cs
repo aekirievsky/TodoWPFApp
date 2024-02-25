@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -6,11 +8,25 @@ namespace TodoWPFApp
 {
     public partial class MainWindow : Window
     {
-
+        public List<int> Years { get; set; }
+        public int SelectedYear { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Years = new List<int>();
+
+            for (int year = 2020; year <= 2026; year++)
+            {
+                Years.Add(year);
+            }
+
+            SelectedYear = DateTime.Now.Year;
+
+
+            UpdateCalendar();
+            DataContext = this;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -46,7 +62,7 @@ namespace TodoWPFApp
 
         private void txtTime_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtTime.Text) && txtTime.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtTime.Text) && txtTime.Text.Length > 0)
             {
                 lblTime.Visibility = Visibility.Collapsed;
             }
@@ -55,5 +71,58 @@ namespace TodoWPFApp
                 lblTime.Visibility = Visibility.Visible;
             }
         }
+
+
+        private void LeftButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedYear > Years.Min())
+            {
+                SelectedYear--;
+                UpdateCalendar();
+            }
+        }
+
+        private void RightButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedYear < Years.Max())
+            {
+                SelectedYear++;
+                UpdateCalendar();
+            }
+        }
+
+        private void YearButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedBtn = (Button)sender;
+            SelectedYear = (int)clickedBtn.Content;
+            UpdateCalendar();
+        }
+
+        private void UpdateCalendar()
+        {
+            int monthIndex = calendar.DisplayDate.Month - 1;
+            selectedMonthText.Text = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[monthIndex];
+
+            yearListBox.SelectedItem = SelectedYear;
+
+            calendar.DisplayDate = new DateTime(SelectedYear, monthIndex + 1, 1);
+            calendar.SelectedDate = new DateTime(SelectedYear, monthIndex + 1, 1);
+        }
+
+        private void MonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedBtn = (Button)sender;
+            string selectedMonth = clickedBtn.Content.ToString();
+            int monthIndex = Array.IndexOf(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames, selectedMonth);
+
+            if (monthIndex >= 0)
+            {
+                calendar.DisplayDate = new DateTime(SelectedYear, monthIndex + 1, 1);
+                calendar.SelectedDate = new DateTime(SelectedYear, monthIndex + 1, 1);
+
+                selectedMonthText.Text = selectedMonth;
+            }
+        }
+
     }
 }
