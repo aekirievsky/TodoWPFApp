@@ -17,7 +17,7 @@ namespace TodoWPFApp
 
             Years = new List<int>();
 
-            for (int year = 2020; year <= 2030; year++)
+            for (int year = 2020; year <= 2027; year++)
             {
                 Years.Add(year);
             }
@@ -104,6 +104,7 @@ namespace TodoWPFApp
         {
             int monthIndex = calendar.DisplayDate.Month - 1;
             selectedMonthText.Text = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[monthIndex];
+            MonthTextBlock.Text = selectedMonthText.Text;
 
             yearListBox.SelectedItem = SelectedYear;
 
@@ -122,8 +123,22 @@ namespace TodoWPFApp
                 calendar.SelectedDate = new DateTime(SelectedYear, selectedMonth, 1);
 
                 selectedMonthText.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth);
+                MonthTextBlock.Text = selectedMonthText.Text;
+
             }
         }
 
+
+        private void calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (calendar.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = calendar.SelectedDate.Value;
+
+                DayWeekNameTextBlock.Text = selectedDate.ToString("dddd");
+
+                DayNumberTextBlock.Text = selectedDate.ToString("dd");
+            }
+        }
     }
 }

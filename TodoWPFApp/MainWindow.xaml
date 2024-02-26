@@ -76,18 +76,18 @@
 
                 <TextBlock x:Name="selectedMonthText" Text="" Foreground="#c73f69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
 
-                <Calendar x:Name="calendar" CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" />
+                <Calendar x:Name="calendar" SelectedDatesChanged="calendar_SelectedDatesChanged"  CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}"/>
             </StackPanel>
 
 
             <StackPanel Grid.Column="1">
                 <!--Titles-->
                 <StackPanel Margin="30 45 30 10" Orientation="Horizontal">
-                    <TextBlock Text="19" FontSize="50" Foreground="#c73f69"/>
+                    <TextBlock x:Name="DayNumberTextBlock" Text="" FontSize="50" Foreground="#c73f69"/>
 
                     <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Text="February" Foreground="#c73f69" FontSize="24"/>
-                        <TextBlock Text="Monday" Foreground="#d35780" FontSize="14"/>
+                        <TextBlock x:Name="MonthTextBlock" Text="" Foreground="#c73f69" FontSize="24"/>
+                        <TextBlock x:Name="DayWeekNameTextBlock" Text="" Foreground="#d35780" FontSize="14"/>
                     </StackPanel>
 
                     <Button Style="{StaticResource buttonBig}" Margin="112 0 5 0">
