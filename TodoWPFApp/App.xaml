@@ -24,7 +24,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#80c73f69"/>
+                    <Setter Property="Foreground" Value="#20c73f69"/>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
                     <Setter Property="Foreground" Value="#8a2b42" />
@@ -51,7 +51,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#80c73f69"/>
+                                <Setter TargetName="border" Property="Background" Value="#20c73f69"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
