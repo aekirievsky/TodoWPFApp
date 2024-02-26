@@ -118,8 +118,8 @@ namespace TodoWPFApp
 
             if (selectedMonth >= 1 && selectedMonth <= 12)
             {
-                calendar.DisplayDate = new DateTime(SelectedYear, selectedMonth + 1, 1);
-                calendar.SelectedDate = new DateTime(SelectedYear, selectedMonth + 1, 1);
+                calendar.DisplayDate = new DateTime(SelectedYear, selectedMonth, 1);
+                calendar.SelectedDate = new DateTime(SelectedYear, selectedMonth, 1);
 
                 selectedMonthText.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth);
             }
