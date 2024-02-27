@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TodoWPFApp.Data.DataBase;
 
 
 namespace TodoWPFApp
@@ -11,9 +12,13 @@ namespace TodoWPFApp
         public List<int> Years { get; set; }
         public int SelectedYear { get; set; }
 
+        public readonly AppDbContext appDbContext;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            appDbContext = new AppDbContext();
 
             Years = new List<int>();
 

@@ -53,7 +53,7 @@
             <Border Background="White" CornerRadius="5" Padding="0 4">
                 <StackPanel>
                     <local:MenuButton Icon="Check" Caption="Check"/>
-                    <local:MenuButton Icon="BellSlash" Caption="Mute"/>
+                    <!--<local:MenuButton Icon="BellSlash" Caption="Mute"/> -->
                     <local:MenuButton Icon="Pencil" Caption="Edit"/>
                     <local:MenuButton Icon="Trash" Caption="Delete"/>
                 </StackPanel>
