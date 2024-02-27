@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,6 +41,7 @@ namespace TodoWPFApp
             calendar.SelectedDate = startDate;
 
             UpdateCalendar();
+            UpdateNotesForSelectedDate(startDate);
             DataContext = this;
         }
 
@@ -147,6 +149,8 @@ namespace TodoWPFApp
             {
                 DateTime selectedDate = calendar.SelectedDate.Value;
 
+                UpdateNotesForSelectedDate(selectedDate);
+
                 DayWeekNameTextBlock.Text = selectedDate.ToString("dddd");
 
                 DayNumberTextBlock.Text = selectedDate.ToString("dd");
@@ -156,6 +160,73 @@ namespace TodoWPFApp
         private void AddNoteButton_Click(object sender, RoutedEventArgs e)
         {
 
+            if (calendar.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = calendar.SelectedDate.Value;
+                DateTime noteTime;
+
+                if (DateTime.TryParse(txtNote.Text, out noteTime))
+                {
+                    DateTime combinedDateTime = selectedDate.Date.Add(noteTime.TimeOfDay);
+
+                    TodoModel newNote = new TodoModel
+                    {
+                        Title = txtNote.Text,
+                        Time = DateTime.Parse(txtTime.Text)
+                    };
+
+                    NotesForSelectedDate.Add(newNote);
+
+                    txtNote.Text = null;
+                    txtTime.Text = null;
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, введите корректное время в формате чч:мм",
+                                    "Ошибка ввода времени",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите дату для заметки на календаре",
+                    "Дата не выбрана",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+
+
+
+        }
+
+        private void UpdateNotesForSelectedDate(DateTime selectedDate)
+        {
+            var notes = GetNotesByDateInCollection(selectedDate);
+
+            NotesForSelectedDate.Clear();
+
+            NotesForSelectedDate.Add(new TodoModel
+            {
+                Title = "Test",
+                Time = DateTime.Now
+            });
+            NotesForSelectedDate.Add(new TodoModel
+            {
+                Title = "Test 2",
+                Time = DateTime.Now.AddHours(1)
+            });
+
+            /* foreach (var note in notes)
+             {
+                 NotesForSelectedDate.Add(note);
+             }*/
+        }
+
+        private List<TodoModel> GetNotesByDateInCollection(DateTime selectedDate)
+        {
+            return NotesForSelectedDate.Where(n => n.Time.Date == selectedDate.Date).ToList();
         }
     }
 }

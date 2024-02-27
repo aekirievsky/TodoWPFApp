@@ -145,11 +145,19 @@
                 </Border>
 
                 <!--Notes-->
-                <uc:Item Title="Test 1" Time="09:45 - 10:30" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
+                <ListBox Grid.Row="1" ItemsSource="{Binding NotesForSelectedDate}" Background="DarkSlateGray" BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time}" Color="#eba5bb" Icon="{Binding Path=Icon}" IconBell="{Binding Path=IconBell}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!--<uc:Item Title="Test 1" Time="09:45 - 10:30" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
                 <uc:Item Title="Test 2" Time="11:30 - 12:00" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
                 <uc:Item Title="Test 3" Time="14:00 - 15:30" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
                 <uc:Item Title="Test 4" Time="20:15 - 21:45" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-                <uc:Item Title="Test 5" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
+                <uc:Item Title="Test 5" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>-->
 
             </StackPanel>
         </Grid>

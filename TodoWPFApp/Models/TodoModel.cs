@@ -14,8 +14,8 @@ namespace TodoWPFApp.Models
             set => SetField(ref _noteId, value);
         }
 
-        private string _title;
-        public string Title
+        private string? _title;
+        public string? Title
         {
             get => _title;
             set => SetField(ref _title, value);
@@ -28,22 +28,22 @@ namespace TodoWPFApp.Models
             set => SetField(ref _time, value);
         }
 
-        private bool _isDelete;
-        public bool IsDelete
+        private bool? _isDelete;
+        public bool? IsDelete
         {
             get => _isDelete;
             set => SetField(ref _isDelete, value);
         }
 
-        private bool _isEdit;
-        public bool IsEdit
+        private bool? _isEdit;
+        public bool? IsEdit
         {
             get => _isEdit;
             set => SetField(ref _isEdit, value);
         }
 
-        private bool _isComplete;
-        public bool IsComplete
+        private bool? _isComplete;
+        public bool? IsComplete
         {
             get => _isComplete;
             set => SetField(ref _isComplete, value);
