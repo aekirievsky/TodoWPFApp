@@ -37,6 +37,10 @@ namespace TodoWPFApp.Data.DataBase
             SaveChanges();
         }
 
+        public List<TodoModel> GetNotesByDate(DateTime date)
+        {
+            return Notes.Where(n => n.Time.Date == date.Date).ToList();
+        }
 
 
     }

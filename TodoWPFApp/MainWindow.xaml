@@ -137,7 +137,7 @@
                             </Grid>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Style="{StaticResource button}">
+                        <Button Grid.Column="1" Style="{StaticResource button}" Click="AddNoteButton_Click">
                             <fa:ImageAwesome Icon="PlusCircle" Width="28" Height="28" Foreground="#f9f9f9"/>
                         </Button>
 

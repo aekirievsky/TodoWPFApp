@@ -1,8 +1,11 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TodoWPFApp.Data.DataBase;
+using TodoWPFApp.Models;
 
 
 namespace TodoWPFApp
@@ -14,11 +17,15 @@ namespace TodoWPFApp
 
         public readonly AppDbContext appDbContext;
 
+        public ObservableCollection<TodoModel> NotesForSelectedDate { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
             appDbContext = new AppDbContext();
+
+            NotesForSelectedDate = new ObservableCollection<TodoModel>();
 
             Years = new List<int>();
 
@@ -144,6 +151,11 @@ namespace TodoWPFApp
 
                 DayNumberTextBlock.Text = selectedDate.ToString("dd");
             }
+        }
+
+        private void AddNoteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
