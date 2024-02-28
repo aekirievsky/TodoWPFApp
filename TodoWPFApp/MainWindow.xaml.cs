@@ -19,6 +19,7 @@ namespace TodoWPFApp
         public readonly AppDbContext appDbContext;
 
         public ObservableCollection<TodoModel> NotesForSelectedDate { get; set; }
+        public ObservableCollection<TodoModel> AllNotes { get; set; }
 
         public MainWindow()
         {
@@ -27,6 +28,7 @@ namespace TodoWPFApp
             appDbContext = new AppDbContext();
 
             NotesForSelectedDate = new ObservableCollection<TodoModel>();
+            AllNotes = new ObservableCollection<TodoModel>();
 
             Years = new List<int>();
 
@@ -88,7 +90,6 @@ namespace TodoWPFApp
             }
         }
 
-
         private void LeftButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedYear > Years.Min())
@@ -142,21 +143,6 @@ namespace TodoWPFApp
             }
         }
 
-
-        private void calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (calendar.SelectedDate.HasValue)
-            {
-                DateTime selectedDate = calendar.SelectedDate.Value;
-
-                UpdateNotesForSelectedDate(selectedDate);
-
-                DayWeekNameTextBlock.Text = selectedDate.ToString("dddd");
-
-                DayNumberTextBlock.Text = selectedDate.ToString("dd");
-            }
-        }
-
         private void AddNoteButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -172,10 +158,11 @@ namespace TodoWPFApp
                     TodoModel newNote = new TodoModel
                     {
                         Title = txtNote.Text,
-                        Time = DateTime.Parse(txtTime.Text)
+                        Time = combinedDateTime
                     };
 
-                    NotesForSelectedDate.Add(newNote);
+                    AllNotes.Add(newNote);
+                    UpdateNotesForSelectedDate(selectedDate);
 
                     txtNote.Text = null;
                     txtTime.Text = null;
@@ -203,19 +190,27 @@ namespace TodoWPFApp
 
         private void UpdateNotesForSelectedDate(DateTime selectedDate)
         {
-            var notes = GetNotesByDateInCollection(selectedDate);
-
             NotesForSelectedDate.Clear();
 
-            foreach (var note in notes)
+            foreach (var note in AllNotes.Where(n => n.Time.Date == selectedDate.Date))
             {
                 NotesForSelectedDate.Add(note);
             }
         }
 
-        private List<TodoModel> GetNotesByDateInCollection(DateTime selectedDate)
+        private void calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            return NotesForSelectedDate.Where(n => n.Time.Date == selectedDate.Date).ToList();
+            if (calendar.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = calendar.SelectedDate.Value;
+
+                UpdateNotesForSelectedDate(selectedDate);
+
+                DayWeekNameTextBlock.Text = selectedDate.ToString("dddd");
+
+                DayNumberTextBlock.Text = selectedDate.ToString("dd");
+            }
         }
+
     }
 }

@@ -56,6 +56,11 @@ namespace TodoWPFApp.UserControls
         }
         public static readonly DependencyProperty IconBellProperty =
      DependencyProperty.Register("IconBell", typeof(FontAwesome.WPF.FontAwesomeIcon), typeof(Item));
+
+        private void MenuButton_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
+        }
     }
 
 }
