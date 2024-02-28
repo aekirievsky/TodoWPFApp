@@ -165,7 +165,7 @@ namespace TodoWPFApp
                 DateTime selectedDate = calendar.SelectedDate.Value;
                 DateTime noteTime;
 
-                if (DateTime.TryParse(txtNote.Text, out noteTime))
+                if (DateTime.TryParse(txtTime.Text, out noteTime))
                 {
                     DateTime combinedDateTime = selectedDate.Date.Add(noteTime.TimeOfDay);
 
@@ -207,21 +207,10 @@ namespace TodoWPFApp
 
             NotesForSelectedDate.Clear();
 
-            NotesForSelectedDate.Add(new TodoModel
+            foreach (var note in notes)
             {
-                Title = "Test",
-                Time = DateTime.Now
-            });
-            NotesForSelectedDate.Add(new TodoModel
-            {
-                Title = "Test 2",
-                Time = DateTime.Now.AddHours(1)
-            });
-
-            /* foreach (var note in notes)
-             {
-                 NotesForSelectedDate.Add(note);
-             }*/
+                NotesForSelectedDate.Add(note);
+            }
         }
 
         private List<TodoModel> GetNotesByDateInCollection(DateTime selectedDate)
