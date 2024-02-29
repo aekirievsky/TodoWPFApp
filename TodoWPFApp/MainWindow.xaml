@@ -18,9 +18,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border CornerRadius="20 0 0 20" Background="#fefefe"/>
+            <Border CornerRadius="20 0 0 20" Background="#99fefefe"/>
 
-            <Border CornerRadius="0 20 20 0" MouseDown="Border_MouseDown" Background="DarkSlateGray" Grid.Column="1"/>
+            <Border CornerRadius="0 20 20 0" MouseDown="Border_MouseDown" Background="#99696969" Grid.Column="1"/>
         </Grid>
 
         <!--Grid Controls-->
@@ -100,10 +100,10 @@
 
                 </StackPanel>
 
-                <TextBlock Text="5 tasks - 2 dates left" Foreground="#d35780" FontSize="16" Margin="30 0 20 0"/>
+                <TextBlock x:Name="NoteCountTextBlock" Text="" Foreground="#d35780"  FontSize="16" Margin="30 0 20 0"/>
 
                 <!--Add Notes-->
-                <Border Background="#cd5278" CornerRadius="10" HorizontalAlignment="Center" Width="355" Margin="0 30 0 20" Padding="17 15 5 15">
+                <Border Background="#cd5278" CornerRadius="20" HorizontalAlignment="Center" Width="500" Margin="0 30 0 20" Padding="17 15 5 15">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -119,7 +119,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <fa:ImageAwesome Icon="Pencil" Width="15" Height="15" Foreground="#eba5bb"/>
-                                <TextBlock x:Name="lblNote" Text="Add Note" Style="{StaticResource txtHint}" MouseDown="lblNote_MouseDown"/>
+                                <TextBlock x:Name="lblNote" Text="Текст..." Style="{StaticResource txtHint}" MouseDown="lblNote_MouseDown"/>
                                 <TextBox x:Name="txtNote" Style="{StaticResource textBox}" TextChanged="txtNote_TextChanged"/>
                             </Grid>
 
@@ -145,23 +145,20 @@
                 </Border>
 
                 <!--Notes-->
-                <ListBox Grid.Row="1" ItemsSource="{Binding Path=NotesForSelectedDate}" Background="DarkSlateGray" BorderThickness="0">
+                <ListBox Grid.Row="1" ItemsSource="{Binding Path=NotesForSelectedDate}" Background="#95B0C4DE" BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time, StringFormat=dd.MM.yyyy hh:mm tt}" Color="#f1f1f1" Icon="CircleOutline" IconBell="Bell"/>
+                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time, StringFormat=dd.MM.yyyy hh:mm tt}" Color="#F0FFF0" Icon="CircleOutline" IconBell="Bell"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <!--<uc:Item Title="Test 1" Time="09:45 - 10:30" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
-                <uc:Item Title="Test 2" Time="11:30 - 12:00" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
-                <uc:Item Title="Test 3" Time="14:00 - 15:30" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-                <uc:Item Title="Test 4" Time="20:15 - 21:45" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-                <uc:Item Title="Test 5" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>-->
-
             </StackPanel>
 
         </Grid>
+        <Button HorizontalAlignment="Left" Margin="1351,15,0,0" VerticalAlignment="Top" Style="{StaticResource buttonClose}" Click="CloseButton_Click">
+            <fa:ImageAwesome Icon="Close"/>
+        </Button>
 
     </Grid>
 </Window>

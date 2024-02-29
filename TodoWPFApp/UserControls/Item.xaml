@@ -16,12 +16,12 @@
         <fa:ImageAwesome Icon="{Binding Path=Icon,ElementName=ItemUC}" Width="20" Height="20" VerticalAlignment="Top" Foreground="#f1f1f1" Margin="0 3 0 0"/>
 
         <StackPanel Grid.Column="1" Margin="10 0">
-            <TextBlock FontFamily="16" FontSize="20" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Title,ElementName=ItemUC}"/>
+            <TextBlock FontFamily="16" FontSize="16" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Title,ElementName=ItemUC}"/>
 
             <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
                 <fa:ImageAwesome Grid.Column="2" Icon="{Binding Path=IconBell,ElementName=ItemUC}" Width="12" Height="12" Foreground="{Binding Path=Color,ElementName=ItemUC}"/>
 
-                <TextBlock FontSize="20" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Time,ElementName=ItemUC}" Margin="8 0 0 0"/>
+                <TextBlock FontSize="16" Foreground="{Binding Path=Color,ElementName=ItemUC}" Text="{Binding Path=Time,ElementName=ItemUC}" Margin="8 0 0 0"/>
             </StackPanel>
         </StackPanel>
 

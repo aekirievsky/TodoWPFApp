@@ -31,7 +31,7 @@ namespace TodoWPFApp.Data.DataBase
             modelBuilder.Entity<TodoModel>().HasKey(t => t.NoteId);
         }
 
-        public void AddToDo(TodoModel note)
+        public void AddNote(TodoModel note)
         {
             Notes.Add(note);
             SaveChanges();

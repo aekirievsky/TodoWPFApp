@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace TodoWPFApp.Models
@@ -8,6 +9,8 @@ namespace TodoWPFApp.Models
     public class TodoModel : INotifyPropertyChanged
     {
         private int _noteId;
+        [Key]        
+        
         public int NoteId
         {
             get => _noteId;
@@ -28,26 +31,7 @@ namespace TodoWPFApp.Models
             set => SetField(ref _time, value);
         }
 
-        private bool? _isDelete;
-        public bool? IsDelete
-        {
-            get => _isDelete;
-            set => SetField(ref _isDelete, value);
-        }
-
-        private bool? _isEdit;
-        public bool? IsEdit
-        {
-            get => _isEdit;
-            set => SetField(ref _isEdit, value);
-        }
-
-        private bool? _isComplete;
-        public bool? IsComplete
-        {
-            get => _isComplete;
-            set => SetField(ref _isComplete, value);
-        }
+       
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

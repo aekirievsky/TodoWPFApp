@@ -42,6 +42,7 @@ namespace TodoWPFApp
             calendar.DisplayDate = startDate;
             calendar.SelectedDate = startDate;
 
+            DownloadNotesFromDataBase();
             UpdateCalendar();
             UpdateNotesForSelectedDate(startDate);
             DataContext = this;
@@ -155,17 +156,39 @@ namespace TodoWPFApp
                 {
                     DateTime combinedDateTime = selectedDate.Date.Add(noteTime.TimeOfDay);
 
-                    TodoModel newNote = new TodoModel
+                    if (appDbContext.Notes.Count() > 1)
                     {
-                        Title = txtNote.Text,
-                        Time = combinedDateTime
-                    };
+                        TodoModel newNote = new TodoModel
+                        {
+                            NoteId = appDbContext.Notes.Count() + 1,
+                            Title = txtNote.Text,
+                            Time = combinedDateTime
+                        };
+                        AllNotes.Add(newNote);
+                        UpdateNotesForSelectedDate(selectedDate);
+                        NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
 
-                    AllNotes.Add(newNote);
-                    UpdateNotesForSelectedDate(selectedDate);
+                        txtNote.Text = null;
+                        txtTime.Text = null;
+                    }
+                    else
+                    {
+                        TodoModel newNote = new TodoModel
+                        {
+                            Title = txtNote.Text,
+                            Time = combinedDateTime
+                        };
 
-                    txtNote.Text = null;
-                    txtTime.Text = null;
+                        AllNotes.Add(newNote);
+                        UpdateNotesForSelectedDate(selectedDate);
+                        NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
+
+                        txtNote.Text = null;
+                        txtTime.Text = null;
+                    }
+
+
+                    
                 }
                 else
                 {
@@ -209,8 +232,30 @@ namespace TodoWPFApp
                 DayWeekNameTextBlock.Text = selectedDate.ToString("dddd");
 
                 DayNumberTextBlock.Text = selectedDate.ToString("dd");
+
+                NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
+
             }
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var note in AllNotes)
+            {
+                appDbContext.AddNote(note);
+            }
+
+            Application.Current.Shutdown();
+        }
+
+        private void DownloadNotesFromDataBase()
+        {
+
+            foreach (var note in appDbContext.Notes)
+            {
+                AllNotes.Add(note);
+            }
+
+        }
     }
 }
