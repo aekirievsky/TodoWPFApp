@@ -192,7 +192,7 @@ namespace TodoWPFApp
         {
             NotesForSelectedDate.Clear();
 
-            foreach (var note in AllNotes.Where(n => n.Time.Date == selectedDate.Date))
+            foreach (var note in AllNotes.Where(n => n.Time.Date == selectedDate.Date).OrderBy(n => n.Time))
             {
                 NotesForSelectedDate.Add(note);
             }
