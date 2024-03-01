@@ -188,7 +188,7 @@ namespace TodoWPFApp
                     }
 
 
-                    
+
                 }
                 else
                 {
@@ -240,10 +240,7 @@ namespace TodoWPFApp
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var note in AllNotes)
-            {
-                appDbContext.AddNote(note);
-            }
+            SaveNotesToDataBase();
 
             Application.Current.Shutdown();
         }
@@ -256,6 +253,18 @@ namespace TodoWPFApp
                 AllNotes.Add(note);
             }
 
+        }
+
+        private void SaveNotesToDataBase()
+        {
+            foreach (var note in AllNotes)
+            {
+                if (!appDbContext.Notes.Any(n => n.NoteId == note.NoteId))
+                {
+                    appDbContext.AddNote(note);
+                }
+
+            }
         }
     }
 }
