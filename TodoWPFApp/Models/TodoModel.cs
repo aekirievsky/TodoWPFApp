@@ -1,27 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace TodoWPFApp.Models
 {
-    public class TodoModel
+    public class TodoModel : INotifyPropertyChanged
     {
-        private bool _isDone;
-        private string _description;
-        public DateTime CreationDate { get; set; } = DateTime.Now;
-
-        public bool IsDone
+        private int _noteId;
+        [Key]        
+        
+        public int NoteId
         {
-            get { return _isDone; }
-            set { _isDone = value; }
+            get => _noteId;
+            set => SetField(ref _noteId, value);
         }
 
-        public string Description
+        private string? _title;
+        public string? Title
         {
-            get { return _description; }
-            set { _description = value; }
+            get => _title;
+            set => SetField(ref _title, value);
+        }
+
+        private DateTime _time;
+        public DateTime Time
+        {
+            get => _time;
+            set => SetField(ref _time, value);
+        }
+
+       
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }

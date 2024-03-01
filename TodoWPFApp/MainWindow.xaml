@@ -7,8 +7,12 @@
         xmlns:uc="clr-namespace:TodoWPFApp.UserControls"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="TodoApp" Height="590" Width="900" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
+        Title="TodoApp" Height="590" Width="1400" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Window.Resources>
 
     <Grid>
         <!--Grid Background-->
@@ -18,9 +22,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border CornerRadius="20 0 0 20" Background="#fefefe"/>
+            <Border CornerRadius="20 0 0 20" Background="#99fefefe"/>
 
-            <Border CornerRadius="0 20 20 0" MouseDown="Border_MouseDown" Background="DarkSlateGray" Grid.Column="1"/>
+            <Border CornerRadius="0 20 20 0" MouseDown="Border_MouseDown" Background="#99696969" Grid.Column="1"/>
         </Grid>
 
         <!--Grid Controls-->
@@ -33,53 +37,61 @@
             <StackPanel>
                 <!--Year Selection-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 50 0 30">
-                    <Button Style="{StaticResource button}">
+                    <Button Style="{StaticResource button}" Click="LeftButton_Click">
                         <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
                     </Button>
 
-                    <Button Content="2020" Style="{StaticResource button}"/>
-                    <Button Content="2021" Style="{StaticResource button}"/>
-                    <Button Content="2022" Style="{StaticResource button}"/>
-                    <Button Content="2023" Style="{StaticResource button}"/>
-                    <Button Content="2024" Style="{StaticResource button}" FontSize="24" Foreground="#c76f69"/>
+                    <ListBox x:Name="yearListBox" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
-                    <Button Style="{StaticResource button}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding}" Style="{StaticResource buttonWithYear}" Click="YearButton_Click"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Style="{StaticResource button}" Click="RightButton_Click">
                         <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
                     </Button>
                 </StackPanel>
 
                 <!--Month Selection-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="1" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="2" Style="{StaticResource buttonMonth}" Foreground="#c73f69" FontWeight="SemiBold"/>
-                    <Button Content="3" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="4" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="5" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="6" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="7" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="8" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="9" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="10" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="11" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="12" Style="{StaticResource buttonMonth}"/>
+                    <Button Content="1" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="2" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="3" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="4" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="5" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="6" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="7" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="8" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="9" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="10" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="11" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
+                    <Button Content="12" Style="{StaticResource buttonMonth}" Click="MonthButton_Click"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="#cacaca" Margin="30 10"/>
 
-                <TextBlock Text="February" Foreground="#c73f69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
+                <TextBlock x:Name="selectedMonthText" Text="" Foreground="#c73f69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
 
-                <Calendar CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" />
+                <Calendar x:Name="calendar" SelectedDatesChanged="calendar_SelectedDatesChanged"  CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}"/>
             </StackPanel>
 
 
             <StackPanel Grid.Column="1">
                 <!--Titles-->
                 <StackPanel Margin="30 45 30 10" Orientation="Horizontal">
-                    <TextBlock Text="19" FontSize="50" Foreground="#c73f69"/>
+                    <TextBlock x:Name="DayNumberTextBlock" Text="" FontSize="50" Foreground="#c73f69"/>
 
                     <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Text="February" Foreground="#c73f69" FontSize="24"/>
-                        <TextBlock Text="Monday" Foreground="#d35780" FontSize="14"/>
+                        <TextBlock x:Name="MonthTextBlock" Text="" Foreground="#c73f69" FontSize="24"/>
+                        <TextBlock x:Name="DayWeekNameTextBlock" Text="" Foreground="#d35780" FontSize="14"/>
                     </StackPanel>
 
                     <Button Style="{StaticResource buttonBig}" Margin="112 0 5 0">
@@ -92,10 +104,10 @@
 
                 </StackPanel>
 
-                <TextBlock Text="5 tasks - 2 dates left" Foreground="#d35780" FontSize="16" Margin="30 0 20 0"/>
+                <TextBlock x:Name="NoteCountTextBlock" Text="" Foreground="#d35780"  FontSize="16" Margin="30 0 20 0"/>
 
                 <!--Add Notes-->
-                <Border Background="#cd5278" CornerRadius="10" HorizontalAlignment="Center" Width="355" Margin="0 30 0 20" Padding="17 15 5 15">
+                <Border Background="#cd5278" CornerRadius="20" HorizontalAlignment="Center" Width="500" Margin="0 30 0 20" Padding="17 15 5 15">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -111,7 +123,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <fa:ImageAwesome Icon="Pencil" Width="15" Height="15" Foreground="#eba5bb"/>
-                                <TextBlock x:Name="lblNote" Text="Add Note" Style="{StaticResource txtHint}" MouseDown="lblNote_MouseDown"/>
+                                <TextBlock x:Name="lblNote" Text="Текст..." Style="{StaticResource txtHint}" MouseDown="lblNote_MouseDown"/>
                                 <TextBox x:Name="txtNote" Style="{StaticResource textBox}" TextChanged="txtNote_TextChanged"/>
                             </Grid>
 
@@ -124,12 +136,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <fa:ImageAwesome Icon="Bell" Width="15" Height="15" Foreground="#eba5bb"/>
-                                <TextBlock x:Name="lblTime" Text="_ _ : _ _ - _ _ : _ _" Style="{StaticResource txtHint}" MouseDown="lblTime_MouseDown"/>
+                                <TextBlock x:Name="lblTime" Text="_ _ : _ _ " Style="{StaticResource txtHint}" MouseDown="lblTime_MouseDown"/>
                                 <TextBox x:Name="txtTime" Style="{StaticResource textBox}" TextChanged="txtTime_TextChanged"/>
                             </Grid>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Style="{StaticResource button}">
+                        <Button Grid.Column="1" Style="{StaticResource button}" Click="AddNoteButton_Click">
                             <fa:ImageAwesome Icon="PlusCircle" Width="28" Height="28" Foreground="#f9f9f9"/>
                         </Button>
 
@@ -137,15 +149,20 @@
                 </Border>
 
                 <!--Notes-->
-                <uc:Item Title="Test 1" Time="09:45 - 10:30" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
-                <uc:Item Title="Test 2" Time="11:30 - 12:00" Color="#eba5bb" Icon="CheckCircle" IconBell="BellSlash"/>
-                <uc:Item Title="Test 3" Time="14:00 - 15:30" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-                <uc:Item Title="Test 4" Time="20:15 - 21:45" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-                <uc:Item Title="Test 5" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
+                <ListBox Grid.Row="1" ItemsSource="{Binding Path=NotesForSelectedDate}" Background="#95B0C4DE" BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time, StringFormat=dd.MM.yyyy hh:mm tt}" Color="#F0FFF0" Icon="CircleOutline" IconBell="Bell"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </StackPanel>
-        </Grid>
 
+        </Grid>
+        <Button HorizontalAlignment="Left" Margin="1351,15,0,0" VerticalAlignment="Top" Style="{StaticResource buttonClose}" Click="CloseButton_Click">
+            <fa:ImageAwesome Icon="Close"/>
+        </Button>
 
     </Grid>
 </Window>
