@@ -152,6 +152,7 @@
             </StackPanel>
 
         </Grid>
+        <!--Close Button-->
         <Button HorizontalAlignment="Left" Margin="1351,15,0,0" VerticalAlignment="Top" Style="{StaticResource buttonClose}" Click="CloseButton_Click">
             <fa:ImageAwesome Icon="Close"/>
         </Button>
