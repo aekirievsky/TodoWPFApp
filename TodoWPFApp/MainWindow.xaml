@@ -10,6 +10,10 @@
         Title="TodoApp" Height="590" Width="1400" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Window.Resources>
+
     <Grid>
         <!--Grid Background-->
         <Grid>
