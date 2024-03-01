@@ -94,14 +94,6 @@
                         <TextBlock x:Name="DayWeekNameTextBlock" Text="" Foreground="#d35780" FontSize="14"/>
                     </StackPanel>
 
-                    <Button Style="{StaticResource buttonBig}" Margin="112 0 5 0">
-                        <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angleBig}"/>
-                    </Button>
-
-                    <Button Style="{StaticResource buttonBig}">
-                        <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angleBig}"/>
-                    </Button>
-
                 </StackPanel>
 
                 <TextBlock x:Name="NoteCountTextBlock" Text="" Foreground="#d35780"  FontSize="16" Margin="30 0 20 0"/>
