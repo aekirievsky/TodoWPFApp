@@ -164,7 +164,8 @@ namespace TodoWPFApp
                             Title = txtNote.Text,
                             Time = combinedDateTime
                         };
-                        AllNotes.Add(newNote);
+                        //AllNotes.Add(newNote);
+                        appDbContext.AddNote(newNote);
                         UpdateNotesForSelectedDate(selectedDate);
                         NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
 
@@ -179,16 +180,14 @@ namespace TodoWPFApp
                             Time = combinedDateTime
                         };
 
-                        AllNotes.Add(newNote);
+                        //AllNotes.Add(newNote);
+                        appDbContext.AddNote(newNote);
                         UpdateNotesForSelectedDate(selectedDate);
                         NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
 
                         txtNote.Text = null;
                         txtTime.Text = null;
                     }
-
-
-
                 }
                 else
                 {
@@ -215,7 +214,7 @@ namespace TodoWPFApp
         {
             NotesForSelectedDate.Clear();
 
-            foreach (var note in AllNotes.Where(n => n.Time.Date == selectedDate.Date).OrderBy(n => n.Time))
+            foreach (var note in appDbContext.Notes.Where(n => n.Time.Date == selectedDate.Date).OrderBy(n => n.Time))
             {
                 NotesForSelectedDate.Add(note);
             }
@@ -240,7 +239,7 @@ namespace TodoWPFApp
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            SaveNotesToDataBase();
+           // SaveNotesToDataBase();
 
             Application.Current.Shutdown();
         }

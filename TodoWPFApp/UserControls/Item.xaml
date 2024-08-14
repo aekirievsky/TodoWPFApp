@@ -55,7 +55,6 @@
                     <local:MenuButton Icon="Check" Caption="Выполнено"/>
                     <local:MenuButton Icon="Pencil" Caption="Редактировать"/>
                     <local:MenuButton Icon="Trash" Caption="Удалить" MouseDoubleClick="MenuButton_MouseDoubleClick"/>
-                    <local:MenuButton Icon="Save" Caption="Сохранить"/>
                 </StackPanel>
             </Border>
 

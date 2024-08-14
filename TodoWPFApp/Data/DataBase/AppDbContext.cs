@@ -42,7 +42,6 @@ namespace TodoWPFApp.Data.DataBase
             return Notes.Where(n => n.Time.Date == date.Date).ToList();
         }
 
-
     }
 
 }
