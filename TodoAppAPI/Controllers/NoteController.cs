@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using TodoAppAPI.Data;
 using TodoAppAPI.DTOs;
 using TodoAppAPI.Entities;
@@ -115,6 +116,34 @@ namespace TodoAppAPI.Controllers
             return Ok(notesList);
         }
 
+        [HttpGet("getNotesByDate")]
+        public async Task<IActionResult> GetNotesByDate([FromQuery] DateTime date)
+        {
+            /*if (string.IsNullOrEmpty(date))
+            {
+                return BadRequest("Date cannot be null or empty");
+            }
+
+            if (!DateTime.TryParse(date, out DateTime parsedDate))
+            {
+                return BadRequest("Invalid date format");
+            }*/
+
+            var noteList = await _context.Notes
+                .Where(n => n.Time.Date == date.Date)
+                .Select(n => new NoteDto
+                {
+                    Id = n.Id,
+                    Title = n.Title,
+                    Time = n.Time,
+                    UserId = n.UserId
+                })
+                .OrderBy(n => n.Time)
+                .ToListAsync();
+
+            return Ok(noteList);
+        }
+
         [HttpPut("editNote")]
         public async Task<IActionResult> EditNote([FromBody] NoteDto noteDto)
         {
@@ -140,7 +169,15 @@ namespace TodoAppAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(note);
+            var updateNoteDto = new NoteDto
+            {
+                Id = note.Id,
+                Title = note.Title,
+                Time = note.Time,
+                UserId = note.UserId
+            };
+
+            return Ok(updateNoteDto);
         }
 
         [HttpDelete("deleteNote")]

@@ -3,15 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TodoWPFApp"
-        xmlns:uc="clr-namespace:TodoWPFApp.UserControls"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="Login/Register" Height="400" Width="600" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True">
 
     <Window.Resources>
-        <!-- Подключение вашего ResourceDictionary -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles.xaml"/>
@@ -19,42 +15,40 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <!-- Левая часть - Авторизация -->
-        <Border CornerRadius="20 0 0 20" Background="#99fefefe">
-            <StackPanel Margin="20">
-                <TextBlock Text="Username" Style="{StaticResource txtHint}"/>
-                <TextBox Style="{StaticResource textBox}" Margin="0,5,0,15"/>
+        <!-- TabControl for switching between Register and Login -->
+        <TabControl Grid.Row="0" x:Name="AuthTabControl">
+            <TabItem Header="Register">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Style="{StaticResource txtHint}"/>
+                    <TextBox x:Name="RegisterUsernameTextBox" Style="{StaticResource textBox}"/>
 
-                <TextBlock Text="Password" Style="{StaticResource txtHint}"/>
-                <PasswordBox Style="{StaticResource passwordBox}" Margin="0,5,0,15"/>
+                    <TextBlock Text="Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="RegisterPasswordBox" Style="{StaticResource passwordBox}"/>
 
-                <Button Content="Login" Style="{StaticResource buttonBig}" Width="150" Margin="0,20,0,0" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
+                    <TextBlock Text="Confirm Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource passwordBox}"/>
 
-        <!-- Правая часть - Регистрация -->
-        <Border CornerRadius="0 20 20 0" Background="#99696969" Grid.Column="1" MouseDown="Border_MouseDown">
-            <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="New here? Register now!" Foreground="#FFFFFF" FontSize="18" Margin="0,0,0,10"/>
+                    <Button Content="Register" Style="{StaticResource buttonBig}" Margin="0 20 0 0" Width="200" Click="RegisterButton_Click"/>
+                </StackPanel>
+            </TabItem>
 
-                <TextBlock Text="Username" Style="{StaticResource txtHint}"/>
-                <TextBox Style="{StaticResource textBox}" Margin="0,5,0,10"/>
+            <TabItem Header="Login">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Style="{StaticResource txtHint}"/>
+                    <TextBox x:Name="LoginUsernameTextBox" Style="{StaticResource textBox}"/>
 
-                <TextBlock Text="Password" Style="{StaticResource txtHint}"/>
-                <PasswordBox Style="{StaticResource passwordBox}" Margin="0,5,0,10"/>
+                    <TextBlock Text="Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="LoginPasswordBox" Style="{StaticResource passwordBox}"/>
 
-                <TextBlock Text="Confirm Password" Style="{StaticResource txtHint}"/>
-                <PasswordBox Style="{StaticResource passwordBox}" Margin="0,5,0,15"/>
-
-                <Button Content="Register" Style="{StaticResource buttonBig}" Width="150" Margin="20,20,0,0" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
+                    <Button Content="Login" Style="{StaticResource buttonBig}" Margin="0 20 0 0" Width="200" Click="LoginButton_Click"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
