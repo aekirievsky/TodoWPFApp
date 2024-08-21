@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TodoWPFApp.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" Name="ItemUC" >
+             mc:Ignorable="d" Name="ItemUC" MouseDoubleClick="Item_MouseDoubleClick">
     <Grid Margin="30 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -52,9 +52,9 @@
 
             <Border Background="White" CornerRadius="5" Padding="0 4">
                 <StackPanel>
-                    <local:MenuButton Icon="Check" Caption="Выполнено"/>
+                   <!-- <local:MenuButton Icon="Check" Caption="Выполнено"/>
                     <local:MenuButton Icon="Pencil" Caption="Редактировать"/>
-                    <local:MenuButton Icon="Trash" Caption="Удалить" MouseDoubleClick="MenuButton_MouseDoubleClick"/>
+                    <local:MenuButton Icon="Trash" Caption="Удалить" Tag="{Binding Id}" MouseDoubleClick="MenuButton_MouseDoubleClick"/>-->
                 </StackPanel>
             </Border>
 

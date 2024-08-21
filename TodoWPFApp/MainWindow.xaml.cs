@@ -161,7 +161,7 @@ namespace TodoWPFApp
                     {
                         Title = txtNote.Text,
                         Time = combinedDateTime,
-                        UserId = userId // Укажите ID пользователя, если он у вас есть в приложении
+                        UserId = userId
                     };
 
                     var response = await _client.PostAsJsonAsync("api/note/addNote", newNoteDto);
@@ -171,7 +171,6 @@ namespace TodoWPFApp
                         var addedNote = await response.Content.ReadFromJsonAsync<TodoModel>();
                         AllNotes.Add(addedNote);
                         UpdateNotesForSelectedDate(selectedDate);
-                        NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
                         txtNote.Text = null;
                         txtTime.Text = null;
                     }
@@ -198,16 +197,13 @@ namespace TodoWPFApp
 
         }
 
-        private async void UpdateNotesForSelectedDate(DateTime selectedDate)
+        public async void UpdateNotesForSelectedDate(DateTime selectedDate)
         {
             NotesForSelectedDate.Clear();
 
             try
             {
-                var requestUri = $"api/note/getNotesByDate?date={selectedDate:yyyy-MM-dd}";
-                Console.WriteLine($"Request URI: {requestUri}");
-
-                var response = await _client.GetAsync(requestUri);
+                var response = await _client.GetAsync($"api/note/getNotesByDate?date={selectedDate:yyyy-MM-dd}");
                 response.EnsureSuccessStatusCode();
 
                 var notes = await response.Content.ReadFromJsonAsync<List<TodoModel>>();
@@ -218,6 +214,7 @@ namespace TodoWPFApp
                     {
                         NotesForSelectedDate.Add(note);
                     }
+                    NoteCountTextBlock.Text = $"Заметок - {NotesForSelectedDate.Count.ToString()}";
                 }
                 else
                 {
@@ -262,7 +259,7 @@ namespace TodoWPFApp
         private async void DownloadNotesFromDataBase()
         {
             var userId = App.LoggedInUserId;
-            var response = await _client.GetAsync("api/note/getAllNotes?userId=" + userId); // Укажите userId
+            var response = await _client.GetAsync("api/note/getAllNotes?userId=" + userId);
             if (response.IsSuccessStatusCode)
             {
                 var notes = await response.Content.ReadFromJsonAsync<List<TodoModel>>();
@@ -278,16 +275,5 @@ namespace TodoWPFApp
 
         }
 
-        /*  private void SaveNotesToDataBase()
-          {
-              foreach (var note in AllNotes)
-              {
-                  if (!appDbContext.Notes.Any(n => n.NoteId == note.NoteId))
-                  {
-                      appDbContext.AddNote(note);
-                  }
-
-              }
-          }*/
     }
 }

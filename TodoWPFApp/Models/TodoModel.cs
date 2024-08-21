@@ -8,13 +8,13 @@ namespace TodoWPFApp.Models
 {
     public class TodoModel : INotifyPropertyChanged
     {
-        private int _noteId;
+        private int _Id;
         [Key]        
         
-        public int NoteId
+        public int Id
         {
-            get => _noteId;
-            set => SetField(ref _noteId, value);
+            get => _Id;
+            set => SetField(ref _Id, value);
         }
 
         private string? _title;

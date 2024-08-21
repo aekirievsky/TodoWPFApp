@@ -119,15 +119,6 @@ namespace TodoAppAPI.Controllers
         [HttpGet("getNotesByDate")]
         public async Task<IActionResult> GetNotesByDate([FromQuery] DateTime date)
         {
-            /*if (string.IsNullOrEmpty(date))
-            {
-                return BadRequest("Date cannot be null or empty");
-            }
-
-            if (!DateTime.TryParse(date, out DateTime parsedDate))
-            {
-                return BadRequest("Invalid date format");
-            }*/
 
             var noteList = await _context.Notes
                 .Where(n => n.Time.Date == date.Date)
