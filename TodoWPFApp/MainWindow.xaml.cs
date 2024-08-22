@@ -32,7 +32,7 @@ namespace TodoWPFApp
 
             Years = new List<int>();
 
-            for (int year = 2020; year <= 2027; year++)
+            for (int year = 2023; year <= 2030; year++)
             {
                 Years.Add(year);
             }
