@@ -1,0 +1,54 @@
+﻿<Window x:Class="TodoWPFApp.LoginRegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Login/Register" Height="400" Width="600" FontFamily="Trebuchet MS" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TabControl for switching between Register and Login -->
+        <TabControl Grid.Row="0" x:Name="AuthTabControl">
+            <TabItem Header="Register">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Style="{StaticResource txtHint}"/>
+                    <TextBox x:Name="RegisterUsernameTextBox" Style="{StaticResource textBox}"/>
+
+                    <TextBlock Text="Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="RegisterPasswordBox" Style="{StaticResource passwordBox}"/>
+
+                    <TextBlock Text="Confirm Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource passwordBox}"/>
+
+                    <Button Content="Register" Style="{StaticResource buttonBig}" Margin="0 20 0 0" Width="200" Click="RegisterButton_Click"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Login">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Style="{StaticResource txtHint}"/>
+                    <TextBox x:Name="LoginUsernameTextBox" Style="{StaticResource textBox}"/>
+
+                    <TextBlock Text="Password:" Style="{StaticResource txtHint}"/>
+                    <PasswordBox x:Name="LoginPasswordBox" Style="{StaticResource passwordBox}"/>
+
+                    <Button Content="Login" Style="{StaticResource buttonBig}" Margin="0 20 0 0" Width="200" Click="LoginButton_Click"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

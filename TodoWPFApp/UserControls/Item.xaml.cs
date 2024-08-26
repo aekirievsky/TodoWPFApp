@@ -1,19 +1,30 @@
-﻿using System.Windows;
+﻿using System.Net.Http;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 
 namespace TodoWPFApp.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для Item.xaml
-    /// </summary>
     public partial class Item : UserControl
     {
+        private readonly HttpClient _client;
+
         public Item()
         {
             InitializeComponent();
+            _client = new HttpClient() { BaseAddress = new Uri("http://localhost:5221") };
         }
+
+        public int Id
+        {
+            get { return (int)GetValue(IdProperty); }
+            set { SetValue(IdProperty, value); }
+        }
+
+        public static readonly DependencyProperty IdProperty =
+            DependencyProperty.Register("Id", typeof(int), typeof(Item), new PropertyMetadata(0));
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
@@ -57,9 +68,44 @@ namespace TodoWPFApp.UserControls
         public static readonly DependencyProperty IconBellProperty =
      DependencyProperty.Register("IconBell", typeof(FontAwesome.WPF.FontAwesomeIcon), typeof(Item));
 
-        private void MenuButton_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+
+            if (mainWindow == null)
+            {
+                MessageBox.Show("Не удалось получить доступ к главному экрану приложения!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            DateTime selectedDate = mainWindow.calendar.SelectedDate ?? DateTime.Now;
+
+            if (MessageBox.Show("Вы уверены, что хотите удалить эту заметку?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                await DeleteNote(Id);
+                mainWindow.UpdateNotesForSelectedDate(selectedDate);
+            }
+        }
+
+        private async Task DeleteNote(int noteId)
+        {
+            try
+            {
+                var response = await _client.DeleteAsync($"api/note/deleteNote?Id={noteId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Заметка успешно удалена!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при удалении заметки!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 

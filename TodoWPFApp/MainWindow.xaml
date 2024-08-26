@@ -144,7 +144,7 @@
                 <ListBox Grid.Row="1" ItemsSource="{Binding Path=NotesForSelectedDate}" Background="#95B0C4DE" BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time, StringFormat=dd.MM.yyyy hh:mm tt}" Color="#F0FFF0" Icon="CircleOutline" IconBell="Bell"/>
+                            <uc:Item Title="{Binding Path=Title}" Time="{Binding Path=Time, StringFormat=dd.MM.yyyy hh:mm tt}" Id="{Binding Path=Id}" Color="#F0FFF0" Icon="CircleOutline" IconBell="Bell"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

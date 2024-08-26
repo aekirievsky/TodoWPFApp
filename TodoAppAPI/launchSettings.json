@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "TestApplication": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "externalUrlConfiguration": true, //add this line
+      "applicationUrl": "https://localhost:7003",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
